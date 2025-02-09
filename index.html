@@ -1,49 +1,21 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Coin Flip Casino</title>
-
+    <title>Casino Coin Flip</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
-
     <div class="container">
-
-        <h1>Coin Flip Casino</h1>
-
+        <h1>Casino Coin Flip</h1>
         <div class="game-area">
-
-            <div class="coin-container">
-
-                <img id="coinImage" src="https://i.postimg.cc/WbmFXKRM/file-GVx-Ns5e-FBAj-Te4-Rtm5-PKb-W-1.webp" alt="Coin">
-
-            </div>
-
-            <div class="buttons">
-
-                <button id="headsBtn">Heads</button>
-
-                <button id="tailsBtn">Tails</button>
-
-            </div>
-
-            <p id="result"></p>
-
+            <img id="coin" src="https://i.postimg.cc/WbmFXKRM/file-GVx-Ns5e-FBAj-Te4-Rtm5-PKb-W-1.webp" alt="Coin">
         </div>
-
+        <button onclick="flipCoin()">Flip Coin</button>
+        <p id="result">Click to flip!</p>
     </div>
 
-    <script src="theme.js" defer></script>
-
+    <script src="game.js"></script>
 </body>
-
 </html>
