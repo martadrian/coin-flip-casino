@@ -1,13 +1,20 @@
-function flipCoin() {
-    let coin = document.getElementById("coin");
+function flipCoin(choice) {
+    let coin = document.querySelector("#coin img");
     let resultText = document.getElementById("result");
 
-    let outcome = Math.random() < 0.5 ? "Heads" : "Tails";
-    
-    coin.style.transform = "rotateY(720deg)";
-    
+    let randomFlip = Math.random() < 0.5 ? "heads" : "tails"; // Random result
+    let rotateValue = randomFlip === "heads" ? "rotateY(720deg)" : "rotateY(900deg)";
+
+    // Animate the coin
+    coin.style.transform = rotateValue;
+
     setTimeout(() => {
-        resultText.innerText = `Result: ${outcome}`;
-        coin.style.transform = "rotateY(0deg)";
+        if (choice === randomFlip) {
+            resultText.innerHTML = "You Won! 🎉";
+            resultText.style.color = "green";
+        } else {
+            resultText.innerHTML = "You Lost! ❌";
+            resultText.style.color = "red";
+        }
     }, 1000);
 }
