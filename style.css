@@ -1,0 +1,131 @@
+/* Background */
+
+body {
+
+    background: url('https://i.postimg.cc/sXBGmgyX/file-BAd-CT2a-Ef-UFqb-Ekqyxpcpp.webp') no-repeat center center fixed;
+
+    background-size: cover;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    text-align: center;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+/* Container */
+
+.container {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    height: 100vh;
+
+}
+
+/* Game Area */
+
+.game-area {
+
+    background: rgba(0, 0, 0, 0.7);
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+}
+
+/* Coin Image */
+
+.coin-container {
+
+    width: 150px;
+
+    height: 150px;
+
+    margin: 20px auto;
+
+    perspective: 1000px;
+
+}
+
+#coinImage {
+
+    width: 100%;
+
+    height: 100%;
+
+    transition: transform 1s ease-in-out;
+
+}
+
+/* Flip Animation */
+
+.flip {
+
+    transform: rotateY(720deg);
+
+}
+
+/* Buttons */
+
+.buttons button {
+
+    padding: 10px 20px;
+
+    font-size: 18px;
+
+    margin: 10px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+#headsBtn {
+
+    background: green;
+
+    color: white;
+
+}
+
+#tailsBtn {
+
+    background: red;
+
+    color: white;
+
+}
+
+.buttons button:hover {
+
+    opacity: 0.8;
+
+}
+
+/* Result Text */
+
+#result {
+
+    font-size: 20px;
+
+    margin-top: 20px;
+
+}
