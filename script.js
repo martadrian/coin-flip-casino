@@ -1,3 +1,6 @@
+alert("JavaScript is working!");
+console.log("JavaScript is running correctly!");
+
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("headsBtn").addEventListener("click", function() {
         flipCoin("heads");
