@@ -1,6 +1,5 @@
 ccxt
-python-telegram-bot
-pytz
+aiohttp
 nest_asyncio
-flask
-gunicorn
+pytz
+requests
