@@ -1,4 +1,6 @@
-python-telegram-bot
 ccxt
+python-telegram-bot
+pytz
 nest_asyncio
 flask
+gunicorn
