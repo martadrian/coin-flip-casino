@@ -9,7 +9,9 @@ from aiohttp import web
 
 # --- CONFIGURATION ---
 TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN', '8502307500:AAEXQhcuXFtY6jpcDZSSpRQgxS6E3tz310k')
-TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '6089058395','-5213714280')
+
+# Corrected: Use a list for multiple IDs
+TELEGRAM_CHAT_IDS = ['6089058395', '-5213714280']
 
 EXCHANGES = ['gateio', 'kucoin', 'mexc', 'bitget', 'bybit']
 
@@ -29,10 +31,14 @@ nest_asyncio.apply()
 
 # --- UTILS ---
 def send_telegram(text):
+    """Corrected: Loops through each Chat ID to send the message"""
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "Markdown"}
-    try: requests.post(url, data=payload, timeout=10)
-    except: pass
+    for chat_id in TELEGRAM_CHAT_IDS:
+        payload = {"chat_id": chat_id, "text": text, "parse_mode": "Markdown"}
+        try: 
+            requests.post(url, data=payload, timeout=10)
+        except Exception as e:
+            print(f"Error sending to {chat_id}: {e}")
 
 async def handle_health(request):
     """Keep-alive endpoint for Render"""
@@ -61,7 +67,6 @@ async def get_all_triangular_paths(exchange):
     except: return []
 
 async def scan_single_exchange(ex_id):
-    # Using 'async with' ensures the connection is closed even if an error occurs
     try:
         async with getattr(ccxt, ex_id)({'enableRateLimit': True}) as ex_client:
             paths = await get_all_triangular_paths(ex_client)
@@ -99,21 +104,17 @@ async def run_loop():
 
     while True:
         try:
-            # Select the current exchange from the list
             current_ex_id = EXCHANGES[exchange_index]
             print(f"🔄 [{datetime.datetime.now(MY_TZ).strftime('%H:%M:%S')}] Scanning: {current_ex_id.upper()}")
             
-            # Execute the scan
             await scan_single_exchange(current_ex_id)
             
-            # Update index to move to the next exchange next time
             exchange_index = (exchange_index + 1) % num_exchanges
             
         except Exception as e:
             print(f"🔥 Loop Error: {e}")
             await asyncio.sleep(10)
             
-        # Wait for the next minute before rotating
         await asyncio.sleep(SCAN_INTERVAL)
 
 # --- MAIN ENTRY ---
@@ -122,7 +123,6 @@ async def main():
     server.router.add_get('/', handle_health)
     runner = web.AppRunner(server); await runner.setup()
     
-    # Render uses the PORT environment variable
     port = int(os.environ.get("PORT", 10000))
     await web.TCPSite(runner, '0.0.0.0', port).start()
     print(f"📡 Health check server live on port {port}")
@@ -134,4 +134,3 @@ if __name__ == "__main__":
         asyncio.run(main())
     except KeyboardInterrupt:
         pass
-        
