@@ -9,7 +9,7 @@ from aiohttp import web
 
 # --- CONFIGURATION ---
 TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN', '8502307500:AAEXQhcuXFtY6jpcDZSSpRQgxS6E3tz310k')
-TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '6089058395')
+TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '6089058395','-5213714280')
 
 EXCHANGES = ['gateio', 'kucoin', 'mexc', 'bitget', 'bybit']
 
